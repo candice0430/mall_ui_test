@@ -2,7 +2,7 @@
 1、selenium.common.exceptions.WebDriverException: Message: Can not connect to the Service chromedriver
 https://blog.csdn.net/qq_32151639/article/details/78457921
 2、遇到有iframe时，需要切换iframe
-3、元素定位调试方法：
+3、元素定位调试方法：https://cloud.tencent.com/developer/article/2014328
     - 在html页面中点击f12
     - 选中元素
     - 切换到console控制台

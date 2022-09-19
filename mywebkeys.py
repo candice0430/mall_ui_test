@@ -4,6 +4,7 @@ from selenium.webdriver import ActionChains
 from selenium.webdriver.support.ui import WebDriverWait 
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.select import Select
+import re
 
 class WebKeys:
 
@@ -48,11 +49,11 @@ class WebKeys:
         if ele:
             ele.click()
 
-    def hover(self,locator):
+    def move_to_ele(self,locator):
         ele = self.__find_ele(locator)
         if ele:
             action = ActionChains(self.driver)
-            action.move_to_element(ele)
+            action.move_to_element(ele).perform()
 
     def click_js(self,locator):
         ele = self.__find_ele(locator)
@@ -77,6 +78,11 @@ class WebKeys:
     def select_by_text(self,locator,text):
         ele = Select(self.__find_ele(locator))
         ele.select_by_visible_text(text)
+
+    def get_order_number(self,locator,regstr):
+        ele = self.__find_ele(locator)
+        order_number = re.findall(regstr,ele.text)[0]
+        return order_number
 
     def quit(self):
         self.driver.quit()
