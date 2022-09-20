@@ -1,6 +1,7 @@
 import time
 from selenium import webdriver
 from selenium.webdriver import ActionChains
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait 
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.select import Select
@@ -32,11 +33,11 @@ class WebKeys:
         """
         
         if locator.startswith('/'):
-            return self.driver.find_element_by_xpath(locator)
+            return self.driver.find_element(by=By.XPATH,value=locator)
         elif locator.startswith('#') or locator.find('>') != -1:
-            return self.driver.find_element_by_css_selector(locator)
+            return self.driver.find_element(by=By.CSS_SELECTOR,value=locator)
         else:
-            return self.driver.find_element_by_id(locator)
+            return self.driver.find_element(by=By.ID,value=locator)
         
         
     def input(self,locator,text):
