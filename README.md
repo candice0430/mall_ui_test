@@ -12,6 +12,7 @@ https://blog.csdn.net/qq_32151639/article/details/78457921
     - select_by_value：通过value值选中元素
     - select_by_index:通过下标选中元素，下标从0开始
     - select_by_visibile_text：通过值选中元素
+<<<<<<< HEAD
 
 5、ModuleNotFoundError: No module named 'util'：
 BASE_PATH = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
@@ -27,4 +28,11 @@ sys.path.append(BASE_PATH)
 
 7、po
 https://selenium-python.readthedocs.io/page-objects.html
+=======
+5、出现E   ModuleNotFoundError: No module named '_tkinter':
+brew install python-tk@3.9
+6、ModuleNotFoundError: No module named 'util'：
+BASE_PATH = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+sys.path.append(BASE_PATH)
+>>>>>>> d8c86945dc26e7e18a839bd4b7bcf2d0abc78fef
 
