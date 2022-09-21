@@ -25,7 +25,7 @@ sys.path.append(BASE_PATH)
     # 如以下编写用例命令
       allure generate report/ -o report/html --clean
 7、allure 报告展示loading和404
-
+allure serve temp
 7、po
 https://selenium-python.readthedocs.io/page-objects.html
 =======

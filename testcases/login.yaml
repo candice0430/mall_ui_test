@@ -1,0 +1,54 @@
+
+- title: 登录成功
+  desc: 登录模块
+  steps:
+    - name: 打开登录页面
+      method: get_url
+      url: http://testingedu.com.cn:8000/Home/user/login.html
+    
+    - name: 输入手机号
+      method: input
+      locator: username
+      value: 13800138006
+    
+    - name: 输入密码
+      method: input
+      locator: password
+      value: 123456
+    
+    - name: 输入验证码
+      method: input
+      locator: verify_code
+      value: 12345678
+
+    - name: 点击登录
+      method: click
+      locator: //a[@class="J-login-submit"]
+
+    - name: 等待1s
+      method: sleep
+      value: 1
+  
+- title: 登录失败
+  Page: login_page
+  desc: 登录模块
+  steps:
+    - name: login
+      method: login
+      username: 13800138007
+      password: 12345678
+      code: 123456
+
+    - name: 等待1s
+      method: sleep
+      value: 1
+    - name: 用例通过
+      mthod: assert_pass
+      locator: error_msg
+      
+    
+
+
+    
+    
+    

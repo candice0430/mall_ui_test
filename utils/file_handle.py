@@ -13,7 +13,7 @@ class FileHandle:
 
     @staticmethod
     def absolute_path(file_path,file_name):
-        return os.path.join(FileHandle.base_path(),'testdatas',file_name)
+        return os.path.join(FileHandle.base_path(),file_path,file_name)
 
 
 # file_handle = FileHandle()
