@@ -1,3 +1,4 @@
+from ast import arg
 import pytest
 import os
 import sys
@@ -7,10 +8,10 @@ sys.path.append(BASE_PATH)
 from utils.file_handle import FileHandle
 import yaml
 from po.base_page import BasePage
+from po.driver_factory import DriverFactory
 
 
-print("comein=======")
-data_file_path = FileHandle.absolute_path('testcases','login.yaml')
+data_file_path = FileHandle.absolute_path('testcases','case.yaml')
 print(data_file_path)
 f = open(data_file_path,'r',encoding='utf-8')
 logincases = yaml.safe_load(f)
@@ -19,31 +20,33 @@ print(logincases)
 class TestLogin:
 
     def setup_class(self):
-        self.web = BasePage()
-        self.web.open_browser()
+        self.driver = DriverFactory.get_driver()
+        self.driver.maximize_window()
+        self.web = BasePage(self.driver)
+
 
     @allure.step
     def run_steps(self,func,args):
+        print("args:",args)
+        print("*args:",*args)
         func(*args)
 
     def run_case(self,logincases:dict):
-        allure.dynamic.title(logincases['title'])
+        allure.dynamic.title(logincases['usecase'])
         allure.dynamic.description(logincases['desc'])
         steps = logincases['steps']
-        print("++++++++++++++++++")
-        print(logincases.keys())
-        if 'Page' in logincases.keys():
-            page = logincases['Page']
+
+        if 'page' in logincases.keys():
+            page = logincases['page']
             mod = 'po.%s'%page
-            print("mod:",mod)
             dd = __import__(mod,fromlist = True)
-            self.web = getattr(dd,page)
+            page_class = getattr(dd,page)
+            self.web = page_class(self.driver)
         try:
             for step in steps:
                 func = self.web.__getattribute__(step['method'])
-                caselists = list(step.values())
                 with allure.step(step['name']):
-                    self.run_steps(func,caselists[2:])
+                    self.run_steps(func,step['params'].values())
         except Exception as e:
             print(str(e))
             pytest.fail('用例不通过')

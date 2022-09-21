@@ -8,7 +8,8 @@ class LoginPage(BasePage):
     CODE = 'verify_code'
     LOGIN_BTN = '//a[@class="J-login-submit"]'
 
-    LOGIN_FAIL_HINT = '//div[@class="layui-layer-title"]'
+    LOGIN_FAIL_HINT = 'layui-layer1'
+    
 
     def login(self,username,pwd,code):
         self.get_url(self.URL)
@@ -17,8 +18,15 @@ class LoginPage(BasePage):
         self.input(self.CODE,code)
         self.click(self.LOGIN_BTN)
 
-    def assert_login_fail(self):
-        return self.__find_ele(self.LOGIN_FAIL_HINT)
+    def until_response(self,timeout):
+        print(type(timeout))
+        print(timeout)
+        self.wait_until(self.LOGIN_FAIL_HINT,timeout)
 
-login_page = LoginPage()
+    def expect_prompt_message(self,msg):
+        if not self.ele_is_exist(self.LOGIN_FAIL_HINT):
+            raise Exception("case failed")
+
+
+# login_page = LoginPage()
 

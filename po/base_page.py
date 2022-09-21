@@ -7,21 +7,10 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.select import Select
 import re
 
+
 class BasePage:
-    __first_init = True
-
-    def __init__(self,dr=''):
-        if self.__first_init:
-            self.open_browser(dr)
-            self.__first_init = False
-
-    def open_browser(self,dr=''):
-        if dr == None or dr == '' or dr == 'chrome':
-            self.driver = webdriver.Chrome()
-        elif dr == 'ie':
-            self.driver = webdriver.Ie()
-        elif dr == 'safari':
-            self.driver = webdriver.Safari()
+    def __init__(self,driver):
+        self.driver = driver
 
     def get_url(self,url):
         self.driver.get(url)
@@ -41,6 +30,9 @@ class BasePage:
             return self.driver.find_element(by=By.CSS_SELECTOR,value=locator)
         else:
             return self.driver.find_element(by=By.ID,value=locator)
+
+    def ele_is_exist(self,locator):
+        return self.__find_ele(locator)
         
         
     def input(self,locator,text):
@@ -72,11 +64,10 @@ class BasePage:
     def out_to_iframe(self):
         self.driver.switch_to.default_content()
 
-    def wait_until(self,locator):
-        # WebDriverWait(self.driver,1).until(EC.visibility_of_element_located(locator))
-        ele = self.__find_ele(locator)
-        print(EC.visibility_of(ele))
-        WebDriverWait(self.driver,1).until(EC.visibility_of(self.__find_ele(locator)))
+    def wait_until(self,locator,sec=1):
+        # ele = self.__find_ele(locator)
+        # print(EC.visibility_of(ele))
+        WebDriverWait(self.driver,timeout=sec).until(EC.visibility_of(self.__find_ele(locator)))
 
     
     def select_by_text(self,locator,text):
@@ -91,4 +82,4 @@ class BasePage:
     def quit(self):
         self.driver.quit()
 
-base_page = BasePage()
+# base_page = BasePage()

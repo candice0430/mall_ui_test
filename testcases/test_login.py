@@ -34,8 +34,10 @@ class TestLogin:
                 with allure.step(step['name']):
                     self.run_steps(func,caselists[2:])
         except Exception as e:
+            allure.attach(self.web.driver.get_screenshot_as_png(),'用例报错图',allure.attachment_type.PNG)
             print(str(e))
             pytest.fail('用例不通过')
+        allure.attach(self.web.driver.get_screenshot_as_png(),'用例结果图',allure.attachment_type.PNG)
 
     @allure.feature('登录')
     @pytest.mark.parametrize('logincases',logincases)
