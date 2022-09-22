@@ -48,7 +48,6 @@ class TestLogin:
                 func = self.web.__getattribute__(step['method'])
                 with allure.step(step['name']):
                     if 'params' in step.keys():
-                        print("step:",step)
                         self.run_steps(func,step['params'].values())
                     else:
                         self.run_steps(func)
