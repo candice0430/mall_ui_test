@@ -26,10 +26,11 @@ class TestLogin:
 
 
     @allure.step
-    def run_steps(self,func,args):
-        print("args:",args)
-        print("*args:",*args)
-        func(*args)
+    def run_steps(self,func,args={}):
+        res = func(*args)
+        if res == False:
+            pytest.fail('用例不通过')
+
 
     def run_case(self,logincases:dict):
         allure.dynamic.title(logincases['usecase'])
@@ -46,7 +47,11 @@ class TestLogin:
             for step in steps:
                 func = self.web.__getattribute__(step['method'])
                 with allure.step(step['name']):
-                    self.run_steps(func,step['params'].values())
+                    if 'params' in step.keys():
+                        print("step:",step)
+                        self.run_steps(func,step['params'].values())
+                    else:
+                        self.run_steps(func)
         except Exception as e:
             print(str(e))
             pytest.fail('用例不通过')

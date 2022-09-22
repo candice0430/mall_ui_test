@@ -23,13 +23,18 @@ class BasePage:
         locator:支持通过xpath、css_selector、id查找元素
         return:返回找到的元素
         """
-        
-        if locator.startswith('/'):
-            return self.driver.find_element(by=By.XPATH,value=locator)
-        elif locator.startswith('#') or locator.find('>') != -1:
-            return self.driver.find_element(by=By.CSS_SELECTOR,value=locator)
+        loc = self.__get_locator(locator)
+        return self.driver.find_element(*loc)
+
+    def __get_locator(self,locator_str:str):
+        if locator_str.startswith('/'):
+            return (By.XPATH,locator_str)
+        elif locator_str.startswith('#') or locator_str.find('>') != -1:
+            return (By.XPATH,locator_str)
         else:
-            return self.driver.find_element(by=By.ID,value=locator)
+            return (By.ID,locator_str)
+
+
 
     def ele_is_exist(self,locator):
         return self.__find_ele(locator)
@@ -51,6 +56,10 @@ class BasePage:
             action = ActionChains(self.driver)
             action.move_to_element(ele).perform()
 
+    def cur_url(self,url):
+        print("self.driver.current_url:",self.driver.current_url)
+        return self.driver.current_url == url
+
     def click_js(self,locator):
         ele = self.__find_ele(locator)
         if ele:
@@ -65,10 +74,12 @@ class BasePage:
         self.driver.switch_to.default_content()
 
     def wait_until(self,locator,sec=1):
-        # ele = self.__find_ele(locator)
-        # print(EC.visibility_of(ele))
-        WebDriverWait(self.driver,timeout=sec).until(EC.visibility_of(self.__find_ele(locator)))
+      WebDriverWait(self.driver, 10).until(
+        EC.visibility_of_element_located(self.__get_locator(locator))
+    )
 
+    def wait(self,sec):
+        self.driver.implicitly_wait(sec)
     
     def select_by_text(self,locator,text):
         ele = Select(self.__find_ele(locator))

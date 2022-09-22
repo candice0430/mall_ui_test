@@ -9,19 +9,65 @@
       username: 13800138007
       password: 123456
       code: 123456
-
-  - name: 等待响应
-    method: sleep
-    params:
-      timeout: 3
   
   - name: 等待响应
-    method: until_response
+    method: until_response_fail
     params:
       timeout: 10
   
   - name: 用例通过
     method: expect_prompt_message
     params:
-      text: 用户名或密码错误，请重新输入
+      text: 账号不存在!
+
+- usecase: 
+  module: 登录模块
+  page: LoginPage
+  desc: 输入错误的密码时不可登录
+  steps:
+  - name: 输入错误的手机号
+    method: login
+    params:
+      username: 13800138006
+      password: 12345678
+      code: 123456
+  
+  - name: 等待响应
+    method: until_response_fail
+    params:
+      timeout: 10
+  
+  - name: 用例通过
+    method: expect_prompt_message
+    params:
+      text: 密码错误!
+
+- usecase: 
+  module: 登录模块
+  page: LoginPage
+  desc: 输入正确的手机号密码登录成功
+  steps:
+  - name: 登录成功
+    method: login
+    params:
+      username: 13800138006
+      password: 123456
+      code: 123456
+
+  - name: 等待响应
+    method: until_response_suc
+    params:
+      timeout: 1
+
+- usecase: 
+  module: 个人信息模块
+  page: UserInfoPage
+  desc: 修改头像
+  steps:
+  - name: 登录成功
+    method: upload_avtar
+
+
+
+
 

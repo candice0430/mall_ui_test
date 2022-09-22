@@ -1,3 +1,4 @@
+from telnetlib import SE
 from po.base_page import BasePage
 
 
@@ -9,6 +10,8 @@ class LoginPage(BasePage):
     LOGIN_BTN = '//a[@class="J-login-submit"]'
 
     LOGIN_FAIL_HINT = 'layui-layer1'
+    PHONE_NOT_EXIST_DIV = '//div[text()="{}"]'
+    ACCOUNT_MSG_DIV = '//span[text()="账户余额"]'
     
 
     def login(self,username,pwd,code):
@@ -18,14 +21,17 @@ class LoginPage(BasePage):
         self.input(self.CODE,code)
         self.click(self.LOGIN_BTN)
 
-    def until_response(self,timeout):
-        print(type(timeout))
-        print(timeout)
+    def until_response_fail(self,timeout):
         self.wait_until(self.LOGIN_FAIL_HINT,timeout)
 
+    def until_response_suc(self,timeout):
+        self.wait_until(self.ACCOUNT_MSG_DIV,timeout)
+
     def expect_prompt_message(self,msg):
-        if not self.ele_is_exist(self.LOGIN_FAIL_HINT):
+        msg_div = self.PHONE_NOT_EXIST_DIV.format(msg)
+        if not self.ele_is_exist(msg_div):
             raise Exception("case failed")
+    
 
 
 # login_page = LoginPage()
