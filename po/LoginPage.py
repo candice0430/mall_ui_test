@@ -15,6 +15,7 @@ class LoginPage(BasePage):
     
 
     def login(self,username,pwd,code):
+        print("username:",username)
         self.get_url(self.URL)
         self.input(self.USERNAME_EDIT,username)
         self.input(self.PASSWORD_EDIT,pwd)

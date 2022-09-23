@@ -20,76 +20,97 @@
     params:
       text: 账号不存在!
 
-- usecase: 
-  module: 登录模块
-  page: LoginPage
-  desc: 输入错误的密码时不可登录
-  steps:
-  - name: 输入错误的手机号
-    method: login
-    params:
-      username: 13800138006
-      password: 12345678
-      code: 123456
+# - usecase: 
+#   module: 登录模块
+#   page: LoginPage
+#   desc: 输入错误的密码时不可登录
+#   steps:
+#   - name: 输入错误的手机号
+#     method: login
+#     params:
+#       username: 13800138006
+#       password: 12345678
+#       code: 123456
   
-  - name: 等待响应
-    method: until_response_fail
-    params:
-      timeout: 10
+#   - name: 等待响应
+#     method: until_response_fail
+#     params:
+#       timeout: 10
   
-  - name: 用例通过
-    method: expect_prompt_message
-    params:
-      text: 密码错误!
+#   - name: 用例通过
+#     method: expect_prompt_message
+#     params:
+#       text: 密码错误!
 
-- usecase: 
-  module: 登录模块
-  page: LoginPage
-  desc: 输入正确的手机号密码登录成功
-  steps:
-  - name: 登录成功
-    method: login
-    params:
-      username: 13800138006
-      password: 123456
-      code: 123456
+# - usecase: 
+#   module: 登录模块
+#   page: LoginPage
+#   desc: 输入正确的手机号密码登录成功
+#   steps:
+#   - name: 登录成功
+#     method: login
+#     params:
+#       username: 13800138006
+#       password: 123456
+#       code: 123456
 
-  - name: 等待响应
-    method: until_response_suc
-    params:
-      timeout: 1
+#   - name: 等待响应
+#     method: until_response_suc
+#     params:
+#       timeout: 1
 
-- usecase: 
-  module: 个人信息模块
-  page: UserInfoPage
-  desc: 修改头像
-  steps:
-  - name: 上传正确的照片
-    method: upload_avtar
-    params:
-      file_path: /Users/mac/Documents/pythonProject/mall_ui_test/images.jpeg
+# - usecase: 
+#   module: 个人信息模块
+#   page: UserInfoPage
+#   desc: 修改头像
+#   steps:
+#   - name: 上传正确的照片
+#     method: upload_avtar
+#     params:
+#       file_path: /Users/mac/Documents/pythonProject/mall_ui_test/images.jpeg
 
-  - name: 确认上传成功
-    method: expect_upload_suc
+#   - name: 确认上传成功
+#     method: expect_upload_suc
   
-  - name: 确认保存
-    method: save_upload
+#   - name: 确认保存
+#     method: save_upload
 
-- usecase: 
-  module: 个人信息模块
-  page: UserInfoPage
-  desc: 上传失败
-  steps:
-  - name: 上传错误的照片
-    method: upload_avtar
-    params:
-      file_path: /Users/mac/Documents/pythonProject/mall_ui_test/1.jpeg
+# - usecase: 
+#   module: 个人信息模块
+#   page: UserInfoPage
+#   desc: 上传失败
+#   steps:
+#   - name: 上传错误的照片
+#     method: upload_avtar
+#     params:
+#       file_path: /Users/mac/Documents/pythonProject/mall_ui_test/1.jpeg
 
-  - name: 确认上传失败
-    method: expect_upload_fail
-    params:
-      timeout: 30
+#   - name: 确认上传失败
+#     method: expect_upload_fail
+#     params:
+#       timeout: 30
 
+# - usecase: 
+#   module: 账户设置模块
+#   page: AddressPage
+#   desc: 新增地址成功
+#   steps:
+#   - name: 输入正确的地址
+#     method: add_address
+#     params:
+#       name: 雪儿
+#       province: 广东省
+#       city: 深圳市
+#       district: 南山区
+#       address: 星海名城二期10栋
+#       phone: 13322932002
+
+#   - name: 查找添加的地址
+#     method: expect_address
+#     params:
+#       name: 雪儿
+#       address: 星海名城二期10栋
+#       timeout: 10
   
   
 
