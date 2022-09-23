@@ -14,11 +14,11 @@ class LoginPage(BasePage):
     ACCOUNT_MSG_DIV = '//span[text()="账户余额"]'
     
 
-    def login(self,username,pwd,code):
+    def login(self,username,password,code):
         print("username:",username)
         self.get_url(self.URL)
         self.input(self.USERNAME_EDIT,username)
-        self.input(self.PASSWORD_EDIT,pwd)
+        self.input(self.PASSWORD_EDIT,password)
         self.input(self.CODE,code)
         self.click(self.LOGIN_BTN)
 
@@ -28,8 +28,8 @@ class LoginPage(BasePage):
     def until_response_suc(self,timeout):
         self.wait_until(self.ACCOUNT_MSG_DIV,timeout)
 
-    def expect_prompt_message(self,msg):
-        msg_div = self.PHONE_NOT_EXIST_DIV.format(msg)
+    def expect_prompt_message(self,text):
+        msg_div = self.PHONE_NOT_EXIST_DIV.format(text)
         if not self.ele_is_exist(msg_div):
             raise Exception("case failed")
     

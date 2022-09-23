@@ -26,9 +26,9 @@ class TestLogin:
 
 
     @allure.step
-    def run_steps(self,func,**args):
+    def run_steps(self,func,args):
         print("args:",args)
-        res = func(args)
+        res = func(**args)
         if res == False:
             pytest.fail('用例不通过')
 
