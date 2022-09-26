@@ -65,6 +65,12 @@ class BasePage:
         if ele:
             self.driver.execute_script("arguments[0].click();",ele)
 
+    def exec_js_show(self,locator):
+        ele = self.__find_ele(locator)
+        if ele:
+            # self.driver.execute_script("arguments[0].style=arguments[1]",ele,"display: inline;")
+            self.driver.execute_script("arguments[0].removeAttribute('style')",ele)
+
     def into_iframe(self,locator):
         ele = self.__find_ele(locator)
         if ele:

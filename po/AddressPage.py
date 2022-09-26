@@ -21,10 +21,13 @@ class AddressPage(BasePage):
         self.input(self.NAME_INPUT,name)
         self.input(self.MOBILE_INPUT,phone)
         self.select_by_text(self.PROVINCE_SEL,province)
+        self.sleep(0.5)
         self.select_by_text(self.CITY_SEL,city)
+        self.sleep(0.5)
         self.select_by_text(self.DISRTICT_SEL,district)
         self.input(self.ADDRESS_INPUT,address)
-        self.click(self.ADDRESS_SUMBIT)         
+        self.click(self.ADDRESS_SUMBIT)      
+        
 
     def expect_address(self,name,address,timeout):
         name_ele = self.SPAN_TXT.format(name)
