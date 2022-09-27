@@ -1,4 +1,5 @@
 from audioop import add
+from time import time
 from po.base_page import BasePage
 
 
@@ -14,6 +15,7 @@ class AddressPage(BasePage):
     ADDRESS_SUMBIT = 'address_submit'
     
     SPAN_TXT = '//span[text()="{}"]'
+    ADDRESS_SPAN_DEL = '//span[text()="{}"]/../..//a[text()="删除"]'
 
     def add_address(self,name,phone,province,city,district,address):
         self.get_url(self.URL)
@@ -29,9 +31,23 @@ class AddressPage(BasePage):
         self.click(self.ADDRESS_SUMBIT)      
         
 
-    def expect_address(self,name,address,timeout):
+    def expect_address(self,name,address,timeout,is_exist=True):
         name_ele = self.SPAN_TXT.format(name)
         address_ele = self.SPAN_TXT.format(address)
-        self.wait_until(name_ele,timeout)
-        self.wait_until(address_ele,timeout)
+        if is_exist:
+            self.wait_until(name_ele,timeout)
+            self.wait_until(address_ele,timeout)
+        else:
+            return not self.ele_is_exist(address_ele)
+
+    def del_address(self,address,timeout):
+        del_ele = self.ADDRESS_SPAN_DEL.format(address)
+        self.wait_click_until(del_ele,timeout)
+        print("del_ele:",del_ele)
+        self.click(del_ele)
+        self.sleep(2)
+        
+
+
+
         

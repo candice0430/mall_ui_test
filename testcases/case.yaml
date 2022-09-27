@@ -110,7 +110,71 @@
     params:
       name: 雪儿
       address: 星海名城二期10栋
+      timeout: 2
+
+- usecase: 
+  module: 账户设置模块
+  page: AddressPage
+  desc: 删除地址成功
+  steps:
+  - name: 输入详细地址
+    method: del_address
+    params:
+      address: 星海名城二期10栋
+      timeout: 2
+
+- usecase: 
+  module: 首页模块
+  page: IndexPage
+  desc: 搜索手机成功
+  steps:
+  - name: 输入搜索关键字
+    method: search
+    params:
+      text: 手机
+
+  - name: 搜索成功
+    method: expect_search_result
+    params:
       timeout: 10
+
+- usecase: 
+  module: 首页模块
+  page: IndexPage
+  desc: 加入购物车成功
+  steps:
+  - name: 搜索手机并加入购物车
+    method: add_to_cart
+    params:
+      search_text: 手机
+      name: Huawei/华为 nova 2s
+      timeout: 10
+
+- usecase: 
+  module: 购物车模块
+  page: CartPage
+  desc: 购物车结算
+  steps:
+  - name: 结算成功，返回订单号
+    method: checkout
+
+- usecase: 
+  module: 订单模块
+  page: OrderPage
+  desc: 取消订单成功
+  steps:
+  - name: 取消订单
+    method: cancel_order
+
+
+
+  
+
+
+  
+  
+  
+
   
   
 
