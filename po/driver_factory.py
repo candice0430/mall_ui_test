@@ -17,7 +17,7 @@ class DriverFactory:
         return cls._instance
 
     @classmethod
-    def get_driver(cls,browers="chrome"):
+    def get_driver(cls,browers="Chrome"):
         if cls._dirver is None:
             cls._dirver = cls.create_driver(browers)
             # cls.logger.info("创建" + browers + "浏览器")
@@ -25,15 +25,20 @@ class DriverFactory:
 
     @classmethod
     def create_driver(cls,browers):
-        driver = None
-        if browers.lower() == "chrome":
+        # driver = None
+        # if browers.lower() == "chrome":
+        #     driver = webdriver.Chrome()
+        # elif browers.lower() == "firfox":
+        #     driver = webdriver.Chrome()
+        # elif driver.lower() == "ie":
+        #     driver = webdriver.Ie()
+        # elif driver.lower() == "Safari":
+        #     driver = webdriver.Safari()
+        # else:
+        #     print("您传入的参数browers异常")
+        # return driver
+        try:
+            driver = getattr(webdriver,browers)()
+        except Exception as e:
             driver = webdriver.Chrome()
-        elif browers.lower() == "firfox":
-            driver = webdriver.Chrome()
-        elif driver.lower() == "ie":
-            driver = webdriver.Ie()
-        elif driver.lower() == "Safari":
-            driver = webdriver.Safari()
-        else:
-            print("您传入的参数browers异常")
         return driver

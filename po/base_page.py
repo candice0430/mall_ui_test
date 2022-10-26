@@ -93,4 +93,3 @@ class BasePage:
     def quit(self):
         self.driver.quit()
 
-# base_page = BasePage()
