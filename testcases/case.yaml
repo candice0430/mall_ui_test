@@ -59,36 +59,36 @@
     params:
       timeout: 1
 
-# - usecase: 
-#   module: 个人信息模块
-#   page: UserInfoPage
-#   desc: 修改头像
-#   steps:
-#   - name: 上传正确的照片
-#     method: upload_avtar
-#     params:
-#       file_path: /Users/mac/Documents/pythonProject/mall_ui_test/images.jpeg
+- usecase: 
+  module: 个人信息模块
+  page: UserInfoPage
+  desc: 修改头像
+  steps:
+  - name: 上传正确的照片
+    method: upload_avtar
+    params:
+      file_path: /Users/mac/Documents/pythonProject/mall_ui_test/images.jpeg
 
-#   - name: 确认上传成功
-#     method: expect_upload_suc
+  - name: 确认上传成功
+    method: expect_upload_suc
   
-#   - name: 确认保存
-#     method: save_upload
+  - name: 确认保存
+    method: save_upload
 
-# - usecase: 
-#   module: 个人信息模块
-#   page: UserInfoPage
-#   desc: 上传失败
-#   steps:
-#   - name: 上传错误的照片
-#     method: upload_avtar
-#     params:
-#       file_path: /Users/mac/Documents/pythonProject/mall_ui_test/1.jpeg
+- usecase: 
+  module: 个人信息模块
+  page: UserInfoPage
+  desc: 上传失败
+  steps:
+  - name: 上传错误的照片
+    method: upload_avtar
+    params:
+      file_path: /Users/mac/Documents/pythonProject/mall_ui_test/1.jpeg
 
-#   - name: 确认上传失败
-#     method: expect_upload_fail
-#     params:
-#       timeout: 30
+  - name: 确认上传失败
+    method: expect_upload_fail
+    params:
+      timeout: 30
 
 - usecase: 
   module: 账户设置模块

@@ -14,19 +14,19 @@ web.click('//a[@class="J-login-submit"]')
 web.sleep(1)
 
 # 修改头像
-# web.sleep(1)
-# web.get_url("http://testingedu.com.cn:8000/Home/User/info.html")
-# web.click_js('preview')
-# web.sleep(1)
+web.sleep(1)
+web.get_url("http://testingedu.com.cn:8000/Home/User/info.html")
+web.click_js('preview')
+web.sleep(1)
 
 
-# web.into_iframe('//*[@id="layui-layer-iframe1"]')
-# web.sleep(1)
-# web.input('//*[@id="filePicker"]/div[2]/input',r"/Users/mac/Downloads/images.jpeg")
-# web.wait_until('//span[text()="100%"]')
-# web.click('//div[@class="saveBtn"]')
-# web.out_to_iframe()
-# web.click('//*[@value="确认保存"]')
+web.into_iframe('//*[@id="layui-layer-iframe1"]')
+web.sleep(1)
+web.input('//*[@id="filePicker"]/div[2]/input',r"/Users/mac/Downloads/images.jpeg")
+web.wait_until('//span[text()="100%"]')
+web.click('//div[@class="saveBtn"]')
+web.out_to_iframe()
+web.click('//*[@value="确认保存"]')
 
 
 # 新增地址
