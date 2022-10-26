@@ -27,7 +27,8 @@ class TestLogin:
 
     @allure.step
     def run_steps(self,func,args={}):
-        res = func(*args)
+        print("args:",args)
+        res = func(**args)
         if res == False:
             pytest.fail('用例不通过')
 
@@ -48,7 +49,7 @@ class TestLogin:
                 func = self.web.__getattribute__(step['method'])
                 with allure.step(step['name']):
                     if 'params' in step.keys():
-                        self.run_steps(func,step['params'].values())
+                        self.run_steps(func,step['params'])
                     else:
                         self.run_steps(func)
         except Exception as e:

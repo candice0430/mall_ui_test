@@ -59,36 +59,121 @@
     params:
       timeout: 1
 
-- usecase: 
-  module: 个人信息模块
-  page: UserInfoPage
-  desc: 修改头像
-  steps:
-  - name: 上传正确的照片
-    method: upload_avtar
-    params:
-      file_path: /Users/mac/Documents/pythonProject/mall_ui_test/images.jpeg
+# - usecase: 
+#   module: 个人信息模块
+#   page: UserInfoPage
+#   desc: 修改头像
+#   steps:
+#   - name: 上传正确的照片
+#     method: upload_avtar
+#     params:
+#       file_path: /Users/mac/Documents/pythonProject/mall_ui_test/images.jpeg
 
-  - name: 确认上传成功
-    method: expect_upload_suc
+#   - name: 确认上传成功
+#     method: expect_upload_suc
   
-  - name: 确认保存
-    method: save_upload
+#   - name: 确认保存
+#     method: save_upload
+
+# - usecase: 
+#   module: 个人信息模块
+#   page: UserInfoPage
+#   desc: 上传失败
+#   steps:
+#   - name: 上传错误的照片
+#     method: upload_avtar
+#     params:
+#       file_path: /Users/mac/Documents/pythonProject/mall_ui_test/1.jpeg
+
+#   - name: 确认上传失败
+#     method: expect_upload_fail
+#     params:
+#       timeout: 30
 
 - usecase: 
-  module: 个人信息模块
-  page: UserInfoPage
-  desc: 上传失败
+  module: 账户设置模块
+  page: AddressPage
+  desc: 新增地址成功
   steps:
-  - name: 上传错误的照片
-    method: upload_avtar
+  - name: 输入正确的地址
+    method: add_address
     params:
-      file_path: /Users/mac/Documents/pythonProject/mall_ui_test/1.jpeg
+      name: 雪儿
+      province: 广东省
+      city: 深圳市
+      district: 南山区
+      address: 星海名城二期10栋
+      phone: 13322932002
 
-  - name: 确认上传失败
-    method: expect_upload_fail
+  - name: 查找添加的地址
+    method: expect_address
     params:
-      timeout: 30
+      name: 雪儿
+      address: 星海名城二期10栋
+      timeout: 2
+
+- usecase: 
+  module: 账户设置模块
+  page: AddressPage
+  desc: 删除地址成功
+  steps:
+  - name: 输入详细地址
+    method: del_address
+    params:
+      address: 星海名城二期10栋
+      timeout: 2
+
+- usecase: 
+  module: 首页模块
+  page: IndexPage
+  desc: 搜索手机成功
+  steps:
+  - name: 输入搜索关键字
+    method: search
+    params:
+      text: 手机
+
+  - name: 搜索成功
+    method: expect_search_result
+    params:
+      timeout: 10
+
+- usecase: 
+  module: 首页模块
+  page: IndexPage
+  desc: 加入购物车成功
+  steps:
+  - name: 搜索手机并加入购物车
+    method: add_to_cart
+    params:
+      search_text: 手机
+      name: Huawei/华为 nova 2s
+      timeout: 10
+
+- usecase: 
+  module: 购物车模块
+  page: CartPage
+  desc: 购物车结算
+  steps:
+  - name: 结算成功，返回订单号
+    method: checkout
+
+- usecase: 
+  module: 订单模块
+  page: OrderPage
+  desc: 取消订单成功
+  steps:
+  - name: 取消订单
+    method: cancel_order
+
+
+
+  
+
+
+  
+  
+  
 
   
   

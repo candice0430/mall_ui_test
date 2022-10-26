@@ -9,6 +9,7 @@ import re
 
 
 class BasePage:
+
     def __init__(self,driver):
         self.driver = driver
 
@@ -65,6 +66,12 @@ class BasePage:
         if ele:
             self.driver.execute_script("arguments[0].click();",ele)
 
+    def exec_js_show(self,locator):
+        ele = self.__find_ele(locator)
+        if ele:
+            # self.driver.execute_script("arguments[0].style=arguments[1]",ele,"display: inline;")
+            self.driver.execute_script("arguments[0].removeAttribute('style')",ele)
+
     def into_iframe(self,locator):
         ele = self.__find_ele(locator)
         if ele:
@@ -74,9 +81,12 @@ class BasePage:
         self.driver.switch_to.default_content()
 
     def wait_until(self,locator,sec=1):
-      WebDriverWait(self.driver, 10).until(
+      WebDriverWait(self.driver, sec).until(
         EC.visibility_of_element_located(self.__get_locator(locator))
     )
+
+    def wait_click_until(self,locator,sec=1):
+        WebDriverWait(self.driver, sec).until(EC.element_to_be_clickable(self.__get_locator(locator)))
 
     def wait(self,sec):
         self.driver.implicitly_wait(sec)
@@ -88,6 +98,7 @@ class BasePage:
     def get_order_number(self,locator,regstr):
         ele = self.__find_ele(locator)
         order_number = re.findall(regstr,ele.text)[0]
+        self.driver.order_no = order_number
         return order_number
 
     def quit(self):
